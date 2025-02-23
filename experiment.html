@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Experiment</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header><h1>Experiment</h1></header>
+  <main>
+    <section id="experimentSection">
+      <!-- Case counter -->
+      <h2 id="caseCounter"></h2>
+      
+      <!-- Scenario text -->
+      <h2 id="scenarioText"></h2>
+      
+      <!-- Participant Diagnosis Input -->
+      <form id="diagnosisForm">
+        <label for="userDiagnosis"><strong>What is your diagnosis?</strong></label>
+        <textarea id="userDiagnosis" rows="6" style="width: 100%; border-radius: 12px; padding: 10px; font-size: 1.2rem;" required></textarea>
+        <br/>
+        <button type="submit">Submit Diagnosis</button>
+      </form>
+      
+      <!-- User Diagnosis Display (Hidden Initially) -->
+      <div id="userDiagnosisContainer" style="display:none; margin-top: 20px; padding: 15px; background-color: #e0e0e0; border-radius: 12px; font-size: 1.2rem;">
+        <h3>Your Diagnosis:</h3>
+        <p id="userDiagnosisText"></p>
+      </div>
+      
+      <!-- AI Diagnosis (hidden initially) -->
+      <div id="aiDiagnosisContainer" style="display:none; margin-top: 20px;">
+        <h3>AI Diagnosis:</h3>
+        <div style="position: relative; margin: 1rem auto; max-width: 500px; background-color: #f0f0f0; padding: 1rem 1.5rem; border-radius: 12px; text-align: left;">
+          <p id="aiDiagnosisText"></p>
+        </div>
+        
+        <!-- Trust Decision Section -->
+        <h3 style="margin-top: 20px; font-weight: bold;">What do you think?</h3>
+        <div>
+          <button id="trustButton">Trust Myself</button>
+          <button id="notTrustButton">Trust AI</button>
+        </div>
+      </div>
+
+      <!-- Extra Questions Form (Hidden Initially) -->
+      <form id="extraQuestionsForm" style="display:none; margin-top: 20px;">
+        <p><strong>1. I believe that the AI diagnosis is:</strong></p>
+        <label><input type="radio" name="accuracy" value="Not accurate at all" required /> Not accurate at all</label><br/>
+        <label><input type="radio" name="accuracy" value="Somewhat accurate" required /> Somewhat accurate</label><br/>
+        <label><input type="radio" name="accuracy" value="Completely accurate" required /> Completely accurate</label><br/><br/>
+
+        <p><strong>2. This AI diagnosis can put your patient at risk.</strong></p>
+        <label><input type="radio" name="risk" value="Not at all" required /> Not at all</label><br/>
+        <label><input type="radio" name="risk" value="Somewhat" required /> Somewhat</label><br/>
+        <label><input type="radio" name="risk" value="Yes, absolutely" required /> Yes, absolutely</label><br/><br/>
+
+        <p><strong>3. I would feel comfortable relying on this AI diagnosis.</strong></p>
+        <label><input type="radio" name="comfortable" value="No" required /> No</label><br/>
+        <label><input type="radio" name="comfortable" value="Partially" required /> Partially</label><br/>
+        <label><input type="radio" name="comfortable" value="Yes, completely" required /> Yes, completely</label><br/><br/>
+
+        <p><strong>4. I trust the AI diagnosis.</strong></p>
+        <label><input type="radio" name="trust" value="No" required /> No</label><br/>
+        <label><input type="radio" name="trust" value="Partially" required /> Partially</label><br/>
+        <label><input type="radio" name="trust" value="Yes, completely" required /> Yes, completely</label><br/><br/>
+
+        <button type="submit">Next</button>
+      </form>
+
+    </section>
+  </main>
+  
+  <footer>
+    <p>&copy; 2025 Experiment</p>
+  </footer>
+  
+  <script src="https://unpkg.com/parse/dist/parse.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
