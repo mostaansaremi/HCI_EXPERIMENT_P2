@@ -261,6 +261,7 @@ function handleExperimentPage() {
   const extraQuestionsForm = document.getElementById("extraQuestionsForm");
 
   let currentDiagnosis = "";
+  let currentDecision = "";
 
   function displayCase(i) {
     if (i >= experimentCases.length) {
@@ -273,7 +274,7 @@ function handleExperimentPage() {
     userDiagnosisContainer.style.display = "none";
     diagnosisForm.style.display = "block";
     extraQuestionsForm.style.display = "none"; // Hide extra questions initially
-    extraQuestionsForm.reset(); // 🔹 CLEAR PREVIOUS SELECTIONS
+    extraQuestionsForm.reset(); // 🔹 Clear previous selections
     userDiagnosisInput.value = "";
     aiDiagnosisText.textContent = "";
 
@@ -302,13 +303,7 @@ function handleExperimentPage() {
   });
 
   function submitDecision(decision) {
-    experimentData.push({
-      scenario: experimentCases[currentIndex].scenario,
-      userDiagnosis: currentDiagnosis,
-      aiDiagnosis: experimentCases[currentIndex].diagnosis,
-      decision
-    });
-
+    currentDecision = decision;
     extraQuestionsForm.style.display = "block"; // Show extra questions form
   }
 
@@ -323,10 +318,21 @@ function handleExperimentPage() {
     const comfortable = getRadioValue("comfortable");
     const trust = getRadioValue("trust");
 
-    experimentData[experimentData.length - 1].accuracy = accuracy;
-    experimentData[experimentData.length - 1].risk = risk;
-    experimentData[experimentData.length - 1].comfortable = comfortable;
-    experimentData[experimentData.length - 1].trust = trust;
+    if (!accuracy || !risk || !comfortable || !trust) {
+      alert("Please answer all questions before proceeding.");
+      return;
+    }
+
+    experimentData.push({
+      scenario: experimentCases[currentIndex].scenario,
+      userDiagnosis: currentDiagnosis,
+      aiDiagnosis: experimentCases[currentIndex].diagnosis,
+      decision: currentDecision,
+      accuracy,
+      risk,
+      comfortable,
+      trust
+    });
 
     saveToLocalStorage("experimentData", experimentData);
 
@@ -334,7 +340,6 @@ function handleExperimentPage() {
     displayCase(currentIndex);
   });
 }
-
 /************************************************************
   7) POST-SURVEY PAGE
 ************************************************************/
